@@ -7,7 +7,6 @@
 #
 # (C)2020 Jonathan Horne
 #
-
 import serial
 import io
 import time
@@ -25,7 +24,10 @@ class EraCmd:
 
 #Utility class for controlling the ERAsynth Micro
 class EraSynth:
-    SEND_DELAY = 0.1    #back-to-back serial commands don't work so pause this many seconds after sending
+    #Back-to-back serial commands don't work without a pause.
+    # Baud rate is only 9600. Not sure if HW flow control is working properly.
+    # This delay fixes the problem.
+    SEND_DELAY = 0.1    #pause this many seconds after sending
 
     #Class Initializer
     # Main purpose is to open the serial port
@@ -91,25 +93,25 @@ class EraSynth:
 
 # Sample usage provided if called from the command line
 if __name__ ==  '__main__':
-    #set serial port device for ERAsynth here
-    default_serial_dev = '/dev/cu.usbmodem14201'
+    #Set serial port device for ERAsynth here
+    serial_dev = '/dev/cu.usbmodem14201'
 
     #Open device with default serial port
-    synth = EraSynth(default_serial_dev)
+    synth = EraSynth(serial_dev)
 
-    #display temperature and current
+    #Display temperature and current
     tempC = synth.get_temp()
     amps = synth.get_current()
     print(f"Temp = {tempC} deg C")
     print(f"Current = {amps} Amps")
 
-    #Set output frequency
-    synth.set_freq(50e6)
+    #Set output frequency in Hz
+    synth.set_freq(500e6)
 
-    #set output amplitude
-    synth.set_dbm(-10)
+    #Set output amplitude in dBm
+    synth.set_dbm(-12)
 
-    #enable the output, pause, then disable
+    #Enable the output, pause, then disable
     synth.rf_on()
     time.sleep(2)
     synth.rf_off()
