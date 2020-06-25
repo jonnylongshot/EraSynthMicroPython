@@ -23,10 +23,12 @@ class EraCmd:
     READ_TEMP       = ">RT"     #Return temp in degrees C
     READ_CURRENT    = ">RC"     #Read current in Amps
 
+#Utility class for controlling the ERAsynth Micro
 class EraSynth:
     SEND_DELAY = 0.1    #back-to-back serial commands don't work so pause this many seconds after sending
 
-    #Constructor
+    #Class Initializer
+    # Main purpose is to open the serial port
     def __init__(self, serial_device):
         self.ser = serial.Serial(serial_device, 9600, timeout=1, rtscts=1)
         self.sio = io.TextIOWrapper(io.BufferedRWPair(self.ser, self.ser))
@@ -87,7 +89,7 @@ class EraSynth:
         self.send_cmd_update_display(f"{EraCmd.RF_OFF}")
 
 
-
+# Sample usage provided if called from the command line
 if __name__ ==  '__main__':
     #set serial port device for ERAsynth here
     default_serial_dev = '/dev/cu.usbmodem14201'
