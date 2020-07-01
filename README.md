@@ -1,7 +1,7 @@
-# EraSynthMicroPython
-This is a basic Python interface to the ERA Synth Micro made by [ERA Instruments](https://erainstruments.com).
-It has been developed and tested against firmware v1.0.7. 
+# SG6000_python
+This is a basic Python interface to the SG6000 signal generator made by [DS Instruments](https://www.dsinstruments.com).
+It has been developed and tested against firmware v4.39
 
-Class methods implement a subset of the [serial port command list](https://github.com/erainstruments/erasynth-micro-docs/blob/master/erasynth-micro-command-list.pdf).
+Class methods implement a subset of the [serial port command list](https://www.dsinstruments.com/support/dsi-scpi-command-list/).
 
 This code was written by Jonathan Horne and is free for use without restriction.
